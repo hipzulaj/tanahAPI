@@ -14,3 +14,10 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/home', 'ArduinoController@index');
+$router->get('/showec', 'ArduinoController@showECLog');
+$router->get('/showph', 'ArduinoController@showPHLog');
+$router->get('/showtemp', 'ArduinoController@showTempLog');
+$router->get('/showhumid', 'ArduinoController@showHumidLog');
+$router->post('/update', 'ArduinoController@updateCondition');
