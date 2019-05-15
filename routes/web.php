@@ -16,6 +16,8 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/home', 'HomeController@index');
+$router->get('/getsensor/{nama_tanaman}', 'HomeController@getSensorData');
+$router->get('/getindicator/{nama_tanaman}', 'HomeController@indicator');
 $router->get('/showec', 'DetailsController@showECLog');
 $router->get('/showph', 'DetailsController@showPHLog');
 $router->get('/showtemp', 'DetailsController@showTempLog');
