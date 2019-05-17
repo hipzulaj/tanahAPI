@@ -17,7 +17,7 @@ class HomeController extends Controller
         //
     }
 
-    public function index(){
+    public function index(Request $request){
       $data = ModelTanahnya::presentCondition();
       return response()->json($data);
     }
@@ -28,8 +28,9 @@ class HomeController extends Controller
       // return response()->json($data);
     }
 
-    public function getSensorData($nama_tanaman){
+    public function getSensorData(Request $request, $nama_tanaman){
       $sensor_result = ModelTanahnya::presentCondition();
+      $indikator = $this->indicator($nama_tanaman);
 
       $sensor = [
         'id' => $sensor_result->id,
@@ -38,6 +39,14 @@ class HomeController extends Controller
         'ph' => $sensor_result->ph_sensor,
         'humid' => $sensor_result->humid_sensor,
         'time' => $sensor_result->waktu_diambil,
+        'batas_bawah_ec' => $indikator->batas_bawah_ec,
+        'batas_atas_ec' => $indikator->batas_atas_ec,
+        'batas_bawah_ph' => $indikator->batas_bawah_ph,
+        'batas_atas_ph' => $indikator->batas_atas_ph,
+        'batas_bawah_temp' => $indikator->batas_bawah_temp,
+        'batas_atas_temp' => $indikator->batas_atas_temp,
+        'batas_bawah_humid' => $indikator->batas_bawah_humid,
+        'batas_atas_humid' => $indikator->batas_atas_humid,
         'ec_status' => 'OK',
         'ph_status' => 'OK',
         'temp_status' => 'OK',
@@ -45,7 +54,6 @@ class HomeController extends Controller
         'nilai' => 100
       ];
 
-      $indikator = $this->indicator($nama_tanaman);
       if($sensor_result->ec_sensor < $indikator->batas_bawah_ec || $sensor_result->ec_sensor > $indikator->batas_atas_ec){
         $sensor['ec_status'] = 'Not OK';
         $sensor['nilai']-=25;

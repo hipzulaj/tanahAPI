@@ -17,25 +17,25 @@ class DetailsController extends Controller
         //
     }
 
-    public function showECLog(){
+    public function showECLog(Request $request){
       $jenis_sensor = "ec_sensor";
       $data = ModelTanahnya::sensorRead($jenis_sensor);
       return response()->json($data);
     }
 
-    public function showTempLog(){
+    public function showTempLog(Request $request){
       $jenis_sensor = "temp_sensor";
       $data = ModelTanahnya::sensorRead($jenis_sensor);
       return response()->json($data);
     }
 
-    public function showPHLog(){
+    public function showPHLog(Request $request){
       $jenis_sensor = "ph_sensor";
       $data = ModelTanahnya::sensorRead($jenis_sensor);
       return response()->json($data);
     }
 
-    public function showHumidLog(){
+    public function showHumidLog(Request $request){
       $jenis_sensor = "humid_sensor";
       $data = ModelTanahnya::sensorRead($jenis_sensor);
       return response()->json($data);

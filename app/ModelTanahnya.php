@@ -26,4 +26,9 @@ class ModelTanahnya extends Model
       $indikator = DB::table('optimal_tanaman')->where('nama_tanaman', $nama_tanaman)->get(); //select('id', $nama_tanaman, 'batas_bawah_ec', 'batas_atas_ec','batas_bawah_ph', 'batas_atas_ph','batas_bawah_temp', 'batas_atas_temp','batas_bawah_humid','batas_atas_humid')
       return $indikator[0];
     }
+
+    public static function listTanaman(){
+      $list = DB::table('optimal_tanaman')->select('id', 'nama_tanaman')->get();
+      return $list;
+    }
 }
