@@ -24,3 +24,5 @@ $router->get('/showtemp', 'DetailsController@showTempLog');
 $router->get('/showhumid', 'DetailsController@showHumidLog');
 $router->post('/update', 'ArduinoController@updateCondition');
 $router->get('/listtanaman', 'SettingsController@showListTanaman');
+$router->get('/refresh', 'HomeController@refreshSensor');
+$router->get('/notif', 'ArduinoController@sendMessage');

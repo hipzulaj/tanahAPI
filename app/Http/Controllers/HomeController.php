@@ -12,10 +12,9 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(){
+    $this->client = new \GuzzleHttp\Client();
+  }
 
     public function index(Request $request){
       $data = ModelTanahnya::presentCondition();
@@ -31,7 +30,7 @@ class HomeController extends Controller
     public function getSensorData(Request $request, $nama_tanaman){
       $sensor_result = ModelTanahnya::presentCondition();
       $indikator = $this->indicator($nama_tanaman);
-
+      
       $sensor = [
         'id' => $sensor_result->id,
         'ec' => $sensor_result->ec_sensor,
@@ -53,7 +52,7 @@ class HomeController extends Controller
         'humid_status' => 'OK',
         'nilai' => 100
       ];
-
+      
       if($sensor_result->ec_sensor < $indikator->batas_bawah_ec || $sensor_result->ec_sensor > $indikator->batas_atas_ec){
         $sensor['ec_status'] = 'Not OK';
         $sensor['nilai']-=25;
@@ -72,5 +71,11 @@ class HomeController extends Controller
       }
       return response()->json($sensor);
       // print_r($sensor);
+    }
+
+    public function refreshSensor(Request $request){
+      // $this->client->get('http://192.168.0.200:80/refresh/');
+      $test = 'OK';
+      return response()->json($test);
     }
 }

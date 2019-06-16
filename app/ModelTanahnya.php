@@ -16,7 +16,7 @@ class ModelTanahnya extends Model
       $present = DB::table('pembacaan_sensor')->orderBy('waktu_diambil', 'desc')->first();
       return $present;
     }
-
+    
     public static function sensorRead($jenis_sensor){
       $sensor_logs = DB::table('pembacaan_sensor')->select('id', $jenis_sensor, 'waktu_diambil')->get();
       return $sensor_logs;
